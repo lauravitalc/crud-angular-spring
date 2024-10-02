@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Course } from '../model/course';
+import { CoursesService } from '../services/courses.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-courses',
@@ -8,17 +10,18 @@ import { Course } from '../model/course';
 })
 export class CoursesComponent implements OnInit {
 
-  courses:Course[] = [
-    {_id: '1', name: 'Angular', 'category': 'Front-End'},
-    {_id: '2', name: 'Java', 'category': 'Back-End'}
-  ];
+  courses:Course[] = [];
   displayedColumns = ['name', 'category'];
 
-  constructor() {
+  //coursesService: CoursesService;
+
+  constructor(private courseService: CoursesService) {
     //this.courses = [] -> If we initialize "courses:Course[];" only, we need to put this
+    // this.coursesService = new CoursesService();
+    //this.courses = this.coursesService.list();
+    this.courses = courseService.list(); // We can use this way, because we put the service in the constructor. We can put this on ngInit as well if you think it's better.
   }
 
   ngOnInit(): void {
-      
   }
 }
