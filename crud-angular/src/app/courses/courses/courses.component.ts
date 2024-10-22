@@ -10,11 +10,11 @@ import { Observable } from 'rxjs';
   styleUrl: './courses.component.scss'
 })
 export class CoursesComponent implements OnInit {
-  courses: Observable<Course[]>; // We need to put this as Observable, because we are using HttpClient, that returns an Observable
+  courses$: Observable<Course[]>; // We need to put this as Observable, because we are using HttpClient, that returns an Observable
   displayedColumns = ['name', 'category'];
 
   constructor(private courseService: CoursesService) {
-    this.courses = courseService.list(); // We can use this way, because we put the service in the constructor. We can put this on ngInit as well if you think it's better.
+    this.courses$ = courseService.list(); // We can use this way, because we put the service in the constructor. We can put this on ngInit as well if you think it's better.
   }
 
   ngOnInit(): void {
