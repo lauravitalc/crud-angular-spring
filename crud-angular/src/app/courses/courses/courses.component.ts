@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ErrorDialogComponent } from '../../shared/components/error-dialog/error-dialog.component';
 
 @Component({
+  standalone: false,
   selector: 'app-courses',
   templateUrl: './courses.component.html',
   styleUrl: './courses.component.scss'
