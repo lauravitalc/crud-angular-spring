@@ -7,7 +7,7 @@ import { Observable, tap, first, delay } from 'rxjs';
   providedIn: 'root' // Significa que estará disponível para toda a aplicação
 })
 export class CoursesService {
-  private readonly API = '/assets/courses.json'; // Caminho do meu endpoint
+  private readonly API = 'api/courses'; // Caminho do meu endpoint
   constructor(private httpClient: HttpClient) { } // Precisaremos importar o httpClient também para o app.module.ts, para ficar "global"
 
   list(): Observable<any> {

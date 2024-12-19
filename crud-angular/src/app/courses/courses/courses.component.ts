@@ -14,7 +14,7 @@ import { ErrorDialogComponent } from '../../shared/components/error-dialog/error
 })
 export class CoursesComponent implements OnInit {
   courses$: Observable<Course[]>; // We need to put this as Observable, because we are using HttpClient, that returns an Observable
-  displayedColumns = ['name', 'category'];
+  displayedColumns = ['_id', 'name', 'category'];
 
   constructor(
     private courseService: CoursesService,
