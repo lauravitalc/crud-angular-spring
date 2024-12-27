@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../model/course';
 import { CoursesService } from '../services/courses.service';
 import { HttpClient } from '@angular/common/http';
@@ -17,10 +18,12 @@ export class CoursesComponent implements OnInit {
   displayedColumns = ['_id', 'name', 'category', 'actions'];
 
   constructor(
-    private courseService: CoursesService,
-    public dialog: MatDialog
+    private coursesService: CoursesService,
+    public dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    this.courses$ = courseService.list()// We can use this way, because we put the service in the constructor. We can put this on ngInit as well if you think it's better.
+    this.courses$ = coursesService.list()// We can use this way, because we put the service in the constructor. We can put this on ngInit as well if you think it's better.
     .pipe(
       catchError(error => {
         this.onError('Could not load courses');
@@ -36,5 +39,9 @@ export class CoursesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onAdd() {
+    this.router.navigate(['new'], {relativeTo: this.route});
   }
 }
