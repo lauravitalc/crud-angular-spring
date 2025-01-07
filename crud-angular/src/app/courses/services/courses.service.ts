@@ -18,5 +18,9 @@ export class CoursesService {
       tap(courses => console.log(courses)) // O tap é um operador que permite executar um efeito colateral em um Observable sem afetar o valor do mesmo
     ); // Retorna um Observable
   }
+
+  save(record: Course){
+    return this.httpClient.post<Course>(this.API, record)
+  }
 }
 
