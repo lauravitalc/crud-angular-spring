@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Location } from '@angular/common';
 import { CoursesService } from '../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, of, tap } from 'rxjs';
@@ -15,6 +16,7 @@ export class CourseFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: CoursesService,
+    private location: Location
   ) {
     this.form = this.formBuilder.group({
       name: [null],
@@ -28,7 +30,7 @@ export class CourseFormComponent implements OnInit {
 
   onSubmit() {
     this.service.save(this.form.value).pipe(
-      tap(result => console.log(result)),
+      tap(result => this.onSuccess()),
       catchError(error => {
         this.onError();
         return of(null); // Retorna um observable vazio para evitar a interrupção do stream
@@ -37,7 +39,12 @@ export class CourseFormComponent implements OnInit {
   }
 
   onCancel() {
+    this.location.back();
+  }
 
+  private onSuccess () {
+    this._snackBar.open('Couse successfully saved!', '', { duration: 2000 });
+    this.location.back();
   }
 
   private onError() {
