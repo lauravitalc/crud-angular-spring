@@ -7,7 +7,7 @@ import { Observable, tap, first, delay } from 'rxjs';
   providedIn: 'root' // Significa que estará disponível para toda a aplicação
 })
 export class CoursesService {
-  private readonly API = '/assets/courses.json'; // Caminho do meu endpoint
+  private readonly API = 'api/courses'; // Caminho do meu endpoint
   constructor(private httpClient: HttpClient) { } // Precisaremos importar o httpClient também para o app.module.ts, para ficar "global"
 
   list(): Observable<any> {
@@ -17,6 +17,10 @@ export class CoursesService {
       first(), // O first() faz com que o Observable seja finalizado após a primeira emissão
       tap(courses => console.log(courses)) // O tap é um operador que permite executar um efeito colateral em um Observable sem afetar o valor do mesmo
     ); // Retorna um Observable
+  }
+
+  save(record: Course){
+    return this.httpClient.post<Course>(this.API, record)
   }
 }
 
