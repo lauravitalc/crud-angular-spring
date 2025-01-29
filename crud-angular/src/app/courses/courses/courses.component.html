@@ -4,17 +4,18 @@
       Available Courses
     </mat-toolbar>
 
-    <app-courses-list 
-    *ngIf="courses$ | async as courses; else loading"
-    [courses]="courses"
-    ></app-courses-list>
+    <div class="column-flex mat-elevation-z8">
+      <app-courses-list 
+      *ngIf="courses$ | async as courses; else loading"
+      [courses]="courses"
+      ></app-courses-list>
 
-  <ng-template #loading>
-    <div class="loading-spinner">
-      <mat-spinner></mat-spinner>
+      <ng-template #loading>
+        <div class="loading-spinner">
+          <mat-spinner></mat-spinner>
+        </div>
+      </ng-template>
     </div>
-  </ng-template>
-
   </mat-card-content>
 </mat-card>
   
