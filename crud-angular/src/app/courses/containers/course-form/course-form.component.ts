@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NonNullableFormBuilder } from '@angular/forms';
 import { Location } from '@angular/common';
-import { CoursesService } from '../services/courses.service';
+import { CoursesService } from '../../services/courses.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { catchError, of, tap } from 'rxjs';
 
