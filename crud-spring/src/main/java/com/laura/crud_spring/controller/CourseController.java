@@ -38,4 +38,16 @@ public class CourseController {
         return courseRepository.save(course);
         //return courseRepository.status(HttpStatus.CREATED).body(courseRepository.save(course));
     }
+
+    @PutMapping("/{id}")
+    public Course update(@PathVariable Long id, @RequestBody Course course) {
+        return courseRepository.findById(id)
+                .map(recordFound -> {
+                    recordFound.setName(course.getName());
+                    recordFound.setCategory(course.getCategory());
+                    Course updated = courseRepository.save(recordFound);
+                    return ResponseEntity.ok().body(updated);
+                })
+                .orElseGet(() -> ResponseEntity.notFound().build()).getBody();
+    }
 }
